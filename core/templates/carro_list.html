@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Carros para revenda{% endblock title %}
+
+{% block content %}
+<form method="get">
+    <input type="text" name="busca" placeholder="Buscar veículo">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+<table class="table" style="margin-bottom: 10px;">
+    <thead>
+        <tr>
+            <th>Modelo</th>
+            <th>Marca</th>
+            <th>Ano</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for carro in carros %}
+        <tr>
+            <td>{{ carro.modelo }}</td>
+            <td>{{ carro.marca }}</td>
+            <td>{{ carro.ano }}</td>
+            <td>
+                <a href="{% url 'editar_carro' pk=carro.id %}"><i class="material-icons" style="margin-right: 5%;">mode_edit</i></a>
+                <a href="{% url 'remover_carro' pk=carro.id %}"><i class="material-icons">delete</i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'cadastrar_carros' %}">
+    <button type="button" class="btn btn-primary">Cadastrar carro</button>
+</a>
+{% endblock content %}
